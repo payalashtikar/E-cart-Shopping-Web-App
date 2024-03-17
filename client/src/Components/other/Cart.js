@@ -2,11 +2,26 @@ import React, { useState } from 'react'
 import { MdDeleteForever } from "react-icons/md";
 
 const Cart = ({ cart, removeFromCart }) => {
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState({});
 
     const calculateTotalPrice = () => {
-        return cart.reduce((total, item) => total + item.price * 100, 0)
+        return cart.reduce((total, item) => total + item.price * (quantity[item.id] || 1), 0)
     }
+    const increaseQuantity = (itemId) => {
+        setQuantity(prevQuantity => ({
+            ...prevQuantity,
+            [itemId]: (prevQuantity[itemId] || 0) + 1 // Increment quantity for the item
+        }));
+    };
+
+    const decreaseQuantity = (itemId) => {
+        if (quantity[itemId] > 1) { // Ensure quantity doesn't go below 1
+            setQuantity(prevQuantity => ({
+                ...prevQuantity,
+                [itemId]: (prevQuantity[itemId] || 0) - 1 // Decrement quantity for the item
+            }));
+        }
+    };
     return (
         <div className='flex flex-col w-full justify-center items-center '>
             {cart.length !== 0 ? (
@@ -17,9 +32,13 @@ const Cart = ({ cart, removeFromCart }) => {
                             <div className='font-serif'>{item.title}</div>
                             <div className='font-serif'>{item.price} Rs.</div>
                             <div className='flex '>
-                                <button className='m-2 border w-8 cursor-pointer font-serif' >-</button>
-                                <span className='m-2 font-serif'>{quantity}</span>
-                                <button className='m-2 border w-8 cursor-pointer font-serif' >+</button>
+                                <button className='m-2 border w-8 cursor-pointer font-serif'
+                                    onClick={() => decreaseQuantity(item.id)}
+                                >-</button>
+                                <span className='m-2 font-serif'>{quantity[item.id] || 1}</span>
+                                <button className='m-2 border w-8 cursor-pointer font-serif'
+                                    onClick={() => increaseQuantity(item.id)}
+                                >+</button>
                             </div>
                             <button className='font-serif text-2xl text-red-400' onClick={() => removeFromCart(item)} ><MdDeleteForever /></button>
                         </div>
