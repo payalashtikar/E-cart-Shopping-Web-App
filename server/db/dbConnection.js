@@ -8,4 +8,4 @@ const connectionParams = {
 
 mongoose.connect(DB, connectionParams)
     .then(() => console.log('connection - SUCCESS'))
-    .catch(() => console.log('connection - FAILED'))
+    .catch((err) => console.log('connection - FAILED', err))
