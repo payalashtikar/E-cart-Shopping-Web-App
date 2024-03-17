@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MdDeleteForever } from "react-icons/md";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, removeFromCart }) => {
     const [quantity, setQuantity] = useState(1);
 
     const calculateTotalPrice = () => {
@@ -21,7 +21,7 @@ const Cart = ({ cart }) => {
                                 <span className='m-2 font-serif'>{quantity}</span>
                                 <button className='m-2 border w-8 cursor-pointer font-serif' >+</button>
                             </div>
-                            <button className='font-serif text-2xl text-red-400' ><MdDeleteForever /></button>
+                            <button className='font-serif text-2xl text-red-400' onClick={() => removeFromCart(item)} ><MdDeleteForever /></button>
                         </div>
                     ))}
                     <div className='mt-4 font-serif font-bold'>Total Price : {calculateTotalPrice()} Rs.</div>
