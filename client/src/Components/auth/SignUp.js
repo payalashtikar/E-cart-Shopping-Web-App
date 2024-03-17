@@ -45,7 +45,6 @@ const SignUp = () => {
                     {isLoading ? 'Loading...' : 'SignUp'}
                 </button>
             </form>
-            {/* <ToastContainer /> */}
         </div>
     );
 };

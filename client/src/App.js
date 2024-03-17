@@ -7,6 +7,8 @@ import LandingPage from './Pages/LandingPage';
 import Navbar from './Components/Navbar';
 import Cart from './Components/other/Cart';
 import { useState } from 'react';
+import Success from './Components/other/Success';
+import Cancel from './Components/other/Cancel';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -39,7 +41,8 @@ function App() {
               <>
                 <Route path='/homepage' element={<HomePage cart={cart} addToCart={addToCart} />} />
                 <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
-
+                <Route path='/success' element={<Success />} />
+                <Route path='/cancel' element={<Cancel />} />
               </>
             ) :
             (
