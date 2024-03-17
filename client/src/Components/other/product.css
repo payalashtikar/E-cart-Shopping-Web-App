@@ -1,0 +1,69 @@
+/* product.css */
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    margin: 16px;
+    padding: 16px;
+    width: 300px;
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for smoother hover effect */
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    /* Scale up the card on hover */
+}
+
+.product-thumbnail img {
+    width: 100%;
+    height: 200px;
+    /* Set a fixed height for the thumbnail */
+    object-fit: cover;
+    border-radius: 8px;
+    /* Add border-radius for rounded corners */
+}
+
+.product-info {
+    margin-top: 10px;
+}
+
+.product-images {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-top: 10px; */
+}
+
+.product-image {
+    flex: 0 0 calc(33.33% - 8px);
+    /* Adjust image size for responsiveness */
+    margin: 4px;
+}
+
+.product-image img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    /* Add border-radius for rounded corners */
+}
+
+.product-info .font-serif {
+    margin-bottom: 6px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.product-thumbnail img:hover {
+    transform: scale(1.1);
+}
