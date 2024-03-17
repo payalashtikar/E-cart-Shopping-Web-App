@@ -20,7 +20,9 @@ const ProductList = ({ addToCart, cart }) => {
         fetchData();
     }, []);
 
-
+    useEffect(() => {
+        console.log('Cart updated:', cart);
+    }, [cart]);
 
     return (
         <div className='flex flex-col justify-center items-center h-screen'>
@@ -41,7 +43,11 @@ const ProductList = ({ addToCart, cart }) => {
                                 <div className='font-serif'>Category: {prod.category}</div>
                                 <div className='font-serif'>Discount Percentage: {prod.discountPercentage}%</div>
                             </div>
-                            <button className='text-red-400 w-40 font-serif border rounded-3xl p-2 m-4' >Add to Cart</button>
+                            {cart.some(item => item.id === prod.id) ? (
+                                <button className='text-red-400 w-40 font-serif border rounded-3xl p-2 m-4' onClick={() => addToCart(prod)}>Remove from Cart</button>
+                            ) : (
+                                <button className='text-red-400 w-40 font-serif border rounded-3xl p-2 m-4' onClick={() => addToCart(prod)}>Add to Cart</button>
+                            )}
                         </div>
                     ))}
                 </div>
