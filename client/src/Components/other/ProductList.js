@@ -2,15 +2,20 @@
 
 import React, { useEffect, useState } from 'react';
 import './product.css';
+import FilterProductCategory from './FilterProductCategory';
 
 const ProductList = ({ addToCart, cart }) => {
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+
 
     const fetchData = async () => {
         try {
             const response = await fetch("https://dummyjson.com/products");
             const data = await response.json();
             setProducts(data.products);
+            console.log(data.products);
+
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -29,8 +34,10 @@ const ProductList = ({ addToCart, cart }) => {
             <div className='flex flex-col h-full w-full p-4'>
                 <h1 className='font-mono text-2xl p-2'>W-E-L-C-O-M-E</h1>
 
+                <FilterProductCategory products={products} filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts} />
+
                 <div className='flex flex-wrap justify-center'>
-                    {products.map((prod, id) => (
+                    {filteredProducts.map((prod, id) => (
                         <div key={id} className='shadow-lg product-card rounded-lg flex flex-col justify-center items-center'>
                             <div className='product-thumbnail'>
                                 <img className='w-full object-cover' width='100px' src={`${prod.thumbnail}`} alt="product" />
